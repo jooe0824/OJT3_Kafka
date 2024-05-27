@@ -57,7 +57,6 @@ dependencies {
 
     runtimeOnly 'com.mysql:mysql-connector-j'
 
-    implementation 'org.opensearch.client:opensearch-rest-high-level-client:2.14.0' // 최신 버전으로 변경
     implementation 'org.apache.httpcomponents:httpclient:4.5.13'
 }
 
