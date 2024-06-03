@@ -19,11 +19,10 @@ import java.util.List;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class KafkatoOpensearch {
 
     private final RestHighLevelClient client;
-    private MyOpenSearchClient2 myOpenSearchClient2 = new MyOpenSearchClient2();
+    private final MyOpenSearchClient2 myOpenSearchClient2;
 
     String indexName = "maru2";
     String templateName = "maru2-template";
@@ -34,31 +33,44 @@ public class KafkatoOpensearch {
     //maru3-policy 정책을 JSON 형식으로 설정
     String policySource = "{ \"policy\": { \"phases\": { \"hot\": { \"actions\": { \"rollover\": { \"max_age\": \"30d\" } } } } } }";
 
+    public KafkatoOpensearch(
+            MyOpenSearchClient2 myOpenSearchClient2,
+            RestHighLevelClient client
+    ){
+        this.myOpenSearchClient2 = myOpenSearchClient2;
+        this.client = client;
+        myOpenSearchClient2.createIndex(indexName);
+        myOpenSearchClient2.putTemplate(templateName, templateSource);
+        myOpenSearchClient2.putPolicy(policyName, policySource);
+    }
 
     public void save(KafkaData kafkaData) {
 
         Gson gson = new Gson();
-
-        this.myOpenSearchClient2.createIndex(indexName);
-        this.myOpenSearchClient2.putTemplate(templateName, templateSource);
-        this.myOpenSearchClient2.putPolicy(policyName, policySource);
-
         String jsonifiedKafkaData = gson.toJson(kafkaData);
-
         List<String> kafkaDataList = new ArrayList<>();
         kafkaDataList.add(jsonifiedKafkaData);
-
         myOpenSearchClient2.bulkInsert(indexName, kafkaDataList);
 
-        IndexRequest request = new IndexRequest(indexName)
-                .source(kafkaData, XContentType.JSON);
-        try {
-            //IndexRequest 객체를 Opensearch에 전송, 응답을 IndexResponse 객체에 저장
-            client.index(request, RequestOptions.DEFAULT);
-//            log.info("Document inserted : {}", response.getId());
-        } catch (IOException e) {
-            log.error("Error during bulk insert: {}", e.getMessage());
-        }
+        System.out.println("inserting " + kafkaData.toString());
+
+        /**
+         * IndexRequest().source()
+         * 의 파라미터로 serialized 하지 않은 객체를 넣을 경우,
+         * toString() 이 먹혀서, openSearch 에서 필드를 구분하지 못함 (아래 코드)
+         * serialize 해서 json string 으로 넣어야지
+         * openSearch 에서 필드를 구분할 수 있었음 (위 코드)
+         */
+
+//        IndexRequest request = new IndexRequest(indexName)
+//                .source(kafkaData, XContentType.JSON);
+//        try {
+//            //IndexRequest 객체를 Opensearch에 전송, 응답을 IndexResponse 객체에 저장
+//            client.index(request, RequestOptions.DEFAULT);
+////            log.info("Document inserted : {}", response.getId());
+//        } catch (IOException e) {
+//            log.error("Error during bulk insert: {}", e.getMessage());
+//        }
     }
 
 

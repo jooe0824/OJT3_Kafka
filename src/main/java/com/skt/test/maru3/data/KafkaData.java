@@ -39,7 +39,7 @@ public class KafkaData {
     private Map<String, String> fields;
     private String name;
     private Tags tags;
-    private String timestamp;
+    private Long timestamp;
 
 
     @Data
