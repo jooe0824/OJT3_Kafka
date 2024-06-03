@@ -47,25 +47,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-//    implementation("org.springframework:spring-core:${springVersion}") {
-//        exclude group: 'commons-logging', module: 'commons-logging'
-//    }
-//    implementation("org.springframework:spring-context:${springVersion}") {
-//        exclude group: 'commons-logging', module: 'commons-logging'
-//    }
-//// SLF4J dependencies
-//    implementation("org.slf4j:slf4j-api:${slf4jVersion}")
-//    implementation("org.slf4j:slf4j-log4j12:${slf4jVersion}")
-//
-//    // Jackson dependencies
-//    implementation("com.fasterxml.jackson.core:jackson-core:${jacksonVersion}")
-//    implementation("com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}")
-//    implementation("com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}")
-
-
-//    implementation 'com.google.code.gson:gson:2.10'
-//    implementation 'com.jcraft:jsch:0.1.55'
-
     // Kafka 클라이언트 라이브러리
     implementation 'org.apache.kafka:kafka-clients:2.8.0'
 
@@ -87,6 +68,10 @@ dependencies {
 //    implementation 'com.fasterxml.jackson.core:jackson-core:2.14.1'
 //    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.1'
 //    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.14.1'
+
+
+//    implementation 'com.google.code.gson:gson:2.10'
+//    implementation 'com.jcraft:jsch:0.1.55'
 }
 
 tasks.named('test') {

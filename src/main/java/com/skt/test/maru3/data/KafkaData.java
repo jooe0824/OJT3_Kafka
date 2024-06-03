@@ -19,6 +19,7 @@ public class KafkaData {
         int CPU6;
         int CPU7;
         Long total;*/
+        private String message;
     }
 
     @Data static public class Tags{

@@ -51,6 +51,7 @@ public class MyKafkaConsumer {
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 
         //CONSUMER 객체가 topic 을 구독하도록 설정. 구독 설정 후 소비자는 해당 토픽에서 메시지 consume 가능
+        //멤버 변수인 CONSUMER에 직접 인스턴스를 달아준 것
         this.CONSUMER = new org.apache.kafka.clients.consumer.KafkaConsumer<>(props);
         this.CONSUMER.subscribe(Collections.singletonList(topic));
 

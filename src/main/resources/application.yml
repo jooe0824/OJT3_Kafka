@@ -1,0 +1,20 @@
+spring:
+  kafka:
+    bootstrap-servers: 13.209.51.15:9094
+    consumer:
+      auto-offset-reset: earliest
+      group-id: my-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  topic: adLog
+  group:
+    id: my-group
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+opensearch:
+  host: 13.209.51.15
+  port: 9200
+  stats: /_nodes/stats
+  index-prefix: txt
