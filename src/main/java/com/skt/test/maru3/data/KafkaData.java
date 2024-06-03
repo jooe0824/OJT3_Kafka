@@ -36,21 +36,19 @@ import java.util.Map;
 //    }
 @Data
 public class KafkaData {
-    private Fields fields;
+    private Map<String, String> fields;
     private String name;
     private Tags tags;
     private String timestamp;
 
 
     @Data
-    static public class Fields{
-        private String message;
-    }
-
-    @Data
     static public class Tags{
+        private String device;
         private String host;
-        private String path;
+        private String irq;
+        private String type;
+        private String tags;
     }
 
 }

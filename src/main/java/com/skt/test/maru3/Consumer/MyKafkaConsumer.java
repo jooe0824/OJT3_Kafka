@@ -1,4 +1,4 @@
-package com.skt.test.maru3.Consumer;
+package com.skt.test.maru3.consumer;
 
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ public class MyKafkaConsumer {
     //OpenSearch 인덱스 템플릿 이름
     String templateName = "maru2-template";
     //index_patterns : 이 패턴에 맞는 모든 인덱스가 이 템플릿의 설정을 상속받음. shards : 인덱스 생성될 때 샤드의 수
-    String templateSource = "{ \"index_patterns\": [\"maru2*\"], \"settings\": { \"number_of_shards\": 2 }, \"mappings\": { \"properties\": { \"timestamp\": { \"type\": \"date\" } } } }";
+    String templateSource = "{ \"index_patterns\": [\"maru*\"], \"settings\": { \"number_of_shards\": 2 }, \"mappings\": { \"properties\": { \"timestamp\": { \"type\": \"date\" } } } }";
     //index 수명 주기 관리 정책의 이름
     String policyName = "maru2-policy";
     //maru3-policy 정책을 JSON 형식으로 설정

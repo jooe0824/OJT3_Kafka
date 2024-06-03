@@ -1,4 +1,4 @@
-package com.skt.test.maru3.Config;
+package com.skt.test.maru3.config;
 
 
 import lombok.extern.slf4j.Slf4j;

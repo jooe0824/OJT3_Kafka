@@ -1,4 +1,4 @@
-package com.skt.test.maru3.Consumer;
+package com.skt.test.maru3.consumer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHost;
