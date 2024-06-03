@@ -1,4 +1,7 @@
 spring:
+  output:
+    ansi:
+      enabled: always
   kafka:
     bootstrap-servers: 13.209.51.15:9094
     consumer:
@@ -18,3 +21,10 @@ opensearch:
   port: 9200
   stats: /_nodes/stats
   index-prefix: txt
+
+logging:
+  level:
+    root: DEBUG
+    com.skt.test.maru3: DEBUG
+  file:
+    name: logs/application.log

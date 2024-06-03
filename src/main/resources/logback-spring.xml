@@ -14,7 +14,7 @@
         </rollingPolicy>
         <encoder>
             <pattern>
-                ▶ %-5level %d{yyyy-MM-dd HH:mm:ss} %logger{15}[%method:%line] - %msg%n
+                %green(%d{yyyy-MM-dd HH:mm:ss.SSS}) %magenta([%thread]) %highlight(%5level) %cyan(%logger) - %yellow(%msg%n)
             </pattern>
         </encoder>
     </appender>
@@ -26,6 +26,3 @@
         <appender-ref ref="file"/>
     </logger>
 </configuration>
-
-
-
