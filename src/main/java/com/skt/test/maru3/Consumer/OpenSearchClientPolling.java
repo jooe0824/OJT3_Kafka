@@ -1,4 +1,4 @@
-package com.skt.test.maru3.consumer;
+package com.skt.test.maru3.Consumer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHost;
@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Slf4j
-public class MyOpenSearchClient2 {
+public class OpenSearchClientPolling {
 
     //client 객체 = RestHighLevelClient의 인스턴스
     private final RestHighLevelClient client;
@@ -20,7 +20,7 @@ public class MyOpenSearchClient2 {
     /**
      * OpenSearch Connect
      */
-    public MyOpenSearchClient2() {
+    public OpenSearchClientPolling() {
         //HttpHost 객체 생성. 해당 host, port 서버와 상호작용할 수 있도록 설정.
         RestClientBuilder builder = RestClient.builder(
                 new HttpHost("13.209.51.15", 9200, "http"));
@@ -86,18 +86,20 @@ public class MyOpenSearchClient2 {
      * @param indexName
      * @param kafkaDataList
      */
-    public void bulkInsert(String indexName, List<String> kafkaDataList) {
+    public void bulkInsert(String indexName, List<String> kafkaDataList) throws IOException {
         for (String kafkaData : kafkaDataList) {
             //String kafkaData를 JSON(XContentType.JSON) 타입으로 지정
             IndexRequest request = new IndexRequest(indexName)
                     .source(kafkaData, XContentType.JSON);
-            try {
-                //IndexRequest 객체를 Opensearch에 전송, 응답을 IndexResponse 객체에 저장
-                IndexResponse response = this.client.index(request, RequestOptions.DEFAULT);
-                log.info("Document inserted : {}", response.getId());
-            } catch (IOException e) {
-                log.error("Error during bulk insert: {}", e.getMessage());
-            }
+            IndexResponse response = this.client.index(request, RequestOptions.DEFAULT);
+            log.info("Document inserted : {}", response.getId());
+//            try {
+//                //IndexRequest 객체를 Opensearch에 전송, 응답을 IndexResponse 객체에 저장
+//                IndexResponse response = this.client.index(request, RequestOptions.DEFAULT);
+//                log.info("Document inserted : {}", response.getId());
+//            } catch (IOException e) {
+//                log.error("Error during bulk insert: {}", e.getMessage());
+//            }
         }
     }
 

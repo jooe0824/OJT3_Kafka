@@ -1,4 +1,4 @@
-package com.skt.test.maru3.config;
+package com.skt.test.maru3.Config;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +12,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class OpensearchConfig {
 
+
+    /**
+     *
+     * Opensearch Address and IP Setting
+     */
     @Bean
     public RestHighLevelClient client() {
         return new RestHighLevelClient(

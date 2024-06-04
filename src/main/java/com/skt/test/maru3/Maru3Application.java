@@ -17,12 +17,6 @@ public class Maru3Application {
     public static void main(String[] args) throws IOException {
         SpringApplication.run(Maru3Application.class, args);
 
-//        String kafkaserveraddress = "13.209.51.15:9094";
-//        String topic = "adLog";
-//
-//        MyKafkaConsumer myKafkaConsumer = new MyKafkaConsumer(kafkaserveraddress, topic);
-//        myKafkaConsumer.startPolling();
-
     }
 
 }

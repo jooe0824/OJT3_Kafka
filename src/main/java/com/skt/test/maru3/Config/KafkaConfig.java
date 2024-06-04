@@ -1,4 +1,4 @@
-package com.skt.test.maru3.config;
+package com.skt.test.maru3.Config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.Consumer;
@@ -46,6 +46,10 @@ public class KafkaConfig {
         return new DefaultKafkaConsumerFactory<>(consumerConfig());
     }
 
+    /**
+     *
+     * Kafka Setting
+     */
     @Bean
     public Map<String, Object> consumerConfig() {
         Map<String, Object> props = new HashMap<>();

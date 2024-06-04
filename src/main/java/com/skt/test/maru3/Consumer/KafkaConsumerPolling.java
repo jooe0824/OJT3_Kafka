@@ -1,10 +1,11 @@
-package com.skt.test.maru3.consumer;
+package com.skt.test.maru3.Consumer;
 
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,11 +13,16 @@ import java.util.List;
 import java.util.Properties;
 
 
+/**
+ *
+ * Consumer Polling Consumer
+ */
+
 @Slf4j
-public class MyKafkaConsumer {
+public class KafkaConsumerPolling {
 
     private final KafkaConsumer<String, String> CONSUMER;
-    private MyOpenSearchClient2 OPENSEARCHCLIENT;
+    private OpenSearchClientPolling OPENSEARCHCLIENT;
 
     //OpenSearch에 생성될 인덱스 이름
     String indexName = "maru2";
@@ -35,7 +41,7 @@ public class MyKafkaConsumer {
      * @param kafkaServerAddress
      * @param topic
      */
-    public MyKafkaConsumer(String kafkaServerAddress, String topic) {
+    public KafkaConsumerPolling(String kafkaServerAddress, String topic) {
 
         //properties 객체 생성
         Properties props = new Properties();
@@ -56,7 +62,7 @@ public class MyKafkaConsumer {
         this.CONSUMER.subscribe(Collections.singletonList(topic));
 
         //Opensearch Client 설정
-        this.OPENSEARCHCLIENT = new MyOpenSearchClient2();
+        this.OPENSEARCHCLIENT = new OpenSearchClientPolling();
         this.OPENSEARCHCLIENT.createIndex(indexName);
         this.OPENSEARCHCLIENT.putTemplate(templateName, templateSource);
         this.OPENSEARCHCLIENT.putPolicy(policyName, policySource);
