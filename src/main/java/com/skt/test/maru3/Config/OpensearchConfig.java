@@ -13,6 +13,9 @@ import org.springframework.context.annotation.Configuration;
 public class OpensearchConfig {
 
 
+    private final String OpensearchAddress = "13.209.51.15";
+    private final int OpensearchPort = 9200;
+
     /**
      *
      * Opensearch Address and IP Setting
@@ -20,7 +23,7 @@ public class OpensearchConfig {
     @Bean
     public RestHighLevelClient client() {
         return new RestHighLevelClient(
-                RestClient.builder(new HttpHost("13.209.51.15", 9200, "http")));
+                RestClient.builder(new HttpHost(OpensearchAddress, OpensearchPort, "http")));
     }
 
 }
