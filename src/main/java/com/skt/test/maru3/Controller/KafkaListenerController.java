@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Slf4j
 @Controller
@@ -21,11 +24,14 @@ public class KafkaListenerController {
     @Autowired
     private KafkatoOpensearch kafkatoopensearch;
 
+    @Autowired
+    private  Gson GSON;
     /**
      * KafkaListener Consumer
      * @param record
      */
-    @KafkaListener(id = "KafkaListenerConsumer", topics="adLog", groupId="my-group")
+
+   //  @KafkaListener(id = "KafkaListenerConsumer", topics="adLog", groupId="my-group1")
     public void consumer(ConsumerRecord<Object, String> record) {
 
         try {
@@ -41,4 +47,30 @@ public class KafkaListenerController {
     }
 
 
+    /**
+     *
+     * author  : goodhyoju
+     * date    : 2024-06-04 17:58
+     * description :
+     * @param messages
+     */
+    @KafkaListener(id = "KafkaListenerConsumer1", topics = "adLog", groupId = "my-group5")
+    public void listen(List<String> messages) {
+        log.debug("messages size: {}", messages.size());
+
+        List<String> kafkaDataList = new ArrayList<>();
+        try {
+            for (String record : messages) {
+                if(record != null && !record.isEmpty()) {
+                    KafkaData kafkaConsumerData = this.GSON.fromJson(record, KafkaData.class);
+
+                    kafkaDataList.add(this.GSON.toJson(kafkaConsumerData));
+                }
+            }
+            kafkatoopensearch.save(kafkaDataList);
+        }catch (Exception e){
+            log.error("error: {}",e.getMessage());
+       //     log.debug(this.GSON.toJson(kafkaDataList));
+        }
+    }
 }

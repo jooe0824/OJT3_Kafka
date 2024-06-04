@@ -11,7 +11,7 @@ spring:
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   topic: adLog
   group:
-    id: my-group
+    id: my-group2
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer

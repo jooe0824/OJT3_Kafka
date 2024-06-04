@@ -22,7 +22,7 @@
     <logger name="com.skt.test.maru3" level="DEBUG">
         <appender-ref ref="file"/>
     </logger>
-    <logger name="org.springframework" level="DEBUG">
+    <logger name="org.springframework" level="ERROR">
         <appender-ref ref="file"/>
     </logger>
 </configuration>
