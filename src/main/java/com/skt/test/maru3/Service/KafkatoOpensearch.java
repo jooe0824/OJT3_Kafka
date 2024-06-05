@@ -19,7 +19,7 @@ import java.util.List;
 public class KafkatoOpensearch {
 
     private final RestHighLevelClient client;
-    private final String indexName = "maru2";
+    private final String indexName = "maru1";
 
     /**
      * KafkatoOpensearch class에서 RestHighLevelClient Bean 주입받기 위해 @Autowired 사용, 생성자 주입방식 이용
