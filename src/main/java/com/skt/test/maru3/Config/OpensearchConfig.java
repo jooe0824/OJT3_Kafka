@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Configuration;
 public class OpensearchConfig {
 
 
-    private final String OpensearchAddress = "13.209.51.15";
-    private final int OpensearchPort = 9200;
+    final String OpensearchAddress = "13.209.51.15";
+    final int OpensearchPort = 9200;
 
     /**
      *

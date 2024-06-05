@@ -91,15 +91,13 @@ public class OpenSearchClientPolling {
             //String kafkaData를 JSON(XContentType.JSON) 타입으로 지정
             IndexRequest request = new IndexRequest(indexName)
                     .source(kafkaData, XContentType.JSON);
-            IndexResponse response = this.client.index(request, RequestOptions.DEFAULT);
-            log.info("Document inserted : {}", response.getId());
-//            try {
-//                //IndexRequest 객체를 Opensearch에 전송, 응답을 IndexResponse 객체에 저장
-//                IndexResponse response = this.client.index(request, RequestOptions.DEFAULT);
-//                log.info("Document inserted : {}", response.getId());
-//            } catch (IOException e) {
-//                log.error("Error during bulk insert: {}", e.getMessage());
-//            }
+            try {
+                //IndexRequest 객체를 Opensearch에 전송, 응답을 IndexResponse 객체에 저장
+                IndexResponse response = this.client.index(request, RequestOptions.DEFAULT);
+                log.info("Document inserted : {}", response.getId());
+            } catch (IOException e) {
+                log.error("Error during bulk insert: {}", e.getMessage());
+            }
         }
     }
 
